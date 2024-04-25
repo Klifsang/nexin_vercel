@@ -1,0 +1,26 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "/server/app.py",
+        "use": "@vercel/python",
+        "config": {
+          "runtime": "3.8",
+          "command": "gunicorn app:app -b 0.0.0.0:8000"
+        }
+      },
+      {
+        "src": "/client/dist",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      { "src": "/login", "dest": "/server/app.py" },
+      { "src": "/logout", "dest": "/server/app.py" },
+      { "src": "/admin", "dest": "/server/app.py" },
+      { "src": "/clients", "dest": "/server/app.py" },
+      { "src": "/tickets", "dest": "/server/app.py" },
+      { "src": "/(.*)", "dest": "/server/app.py" }
+    ]
+  }
+  
